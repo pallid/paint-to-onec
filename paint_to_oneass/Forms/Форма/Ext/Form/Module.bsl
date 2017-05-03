@@ -1,13 +1,15 @@
-﻿//&НаКлиенте
-//Перем ОкноБраузера;
-
-&НаСервере
+﻿&НаСервере
 Процедура ПриСозданииНаСервере(Отказ, СтандартнаяОбработка)
-	Реквизит1 = получитьтекст();
+	ХТМЛ = ПолучитьТекст();
+	ТекущийЦвет = "Синий";
+	УстановитьЗаголовокЦвета();
+	ТекущийРазмер = "Маленький";
+	УстановитьЗаголовокРазмера();
 КонецПроцедуры
 
 Функция ПолучитьТекст()
-	текст = "<!DOCTYPE html>
+	
+	Текст = "<!DOCTYPE html>
 			 |<html>
              |<head>
 			 |<meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -70,13 +72,7 @@
              |    <script>
              |        var canvas;
              |        var context;
-			 |         var isDrawing;
-             |        var previousColorElement;
-             |        // Отслеживаем элемент <img> для толщины линии, по которому ранее щелкнули
-             |        var previousThicknessElement;
-             |        //var url = canvas.toDataURL(""image/jpeg"");
-             |
-             |        //window.location = canvas.toDataURL();
+			 |        var isDrawing;
              |        var imageCopy;
 			 |
              |        window.onload = function () {
@@ -88,38 +84,20 @@
              |            canvas.onmouseup = stopDrawing;
              |            canvas.onmouseout = stopDrawing;
              |            canvas.onmousemove = draw;
-			 |			  changeColor('rgb(0,86,166)', this);
-			 |			  changeThickness(1, this);
+			 |			  changeColor('rgb(0,86,166)');
+			 |			  changeThickness(1);
              |        }
              |
              |
-             |        function changeColor(color, imgElement) {
+             |        function changeColor(color) {
              |            // 	Меняем текущий цвет рисования
              |            context.strokeStyle = color;
-             |
-             |            // Меняем стиль элемента <img>, по которому щелкнули
-             |            imgElement.className = 'Selected';
-             |
-             |            // Возвращаем ранее выбранный элемент <img> в нормальное состояние
-             |            if (previousColorElement != null)
-             |                previousColorElement.className = """";
-             |
-             |            previousColorElement = imgElement;
              |        }
              |
              |        function changeThickness(thickness, imgElement) {
              |            // Изменяем текущую толщину линии
              |            context.lineWidth = thickness;
-             |
-             |            // Меняем стиль элемента <img>, по которому щелкнули
-             |            imgElement.className = 'Selected';
-             |
-             |            // Возвращаем ранее выбранный элемент <img> в нормальное состояние
-             |            if (previousThicknessElement != null)
-             |                previousThicknessElement.className = """";
-             |
-             |            previousThicknessElement = imgElement;
-             |        }
+			 |        }
              |
              |        function startDrawing(e) {
              |            // Начинаем рисовать
@@ -153,93 +131,23 @@
              |        }
              |
              |        function saveCanvas() {
-			 //|            // Находим элемент <img>
-			 //|            var imageCopy = document.getElementById(""savedImageCopy"");
              |
              |            // Отображаем данные холста в элементе <img>
              |            imageCopy = canvas.toDataURL();
              |
-			 //|            // Показываем элемент <div>, делая изображение видимым
-			 //|            // делая изображение видимым
-			 //|            var imageContainer = document.getElementById(""savedCopyContainer"");
-			 //|            imageContainer.style.display = ""block"";
              |        }
              |    </script>
              |</head>
              |<body>
-			 //|    <div class=""Toolbar"">
-			 //|        - Цвет -<br>
-			 ////|        <img id=""redPen"" src=""http://professorweb.ru/downloads/pen_red.gif"" alt=""Красная кисть"" onclick=""changeColor(''rgb(212,21,29)'', this)"">
-			 ////|        <img id=""greenPen"" src=""http://professorweb.ru/downloads/pen_green.gif"" alt=""Зеленая кисть"" onclick=""changeColor(''rgb(131,190,61)'', this)"">
-			 ////|        <img id=""bluePen"" src=""http://professorweb.ru/downloads/pen_blue.gif"" alt=""Синяя кисть"" onclick=""changeColor(''rgb(0,86,166)'', this)"">
-			 // |        <img id=""redPen"" alt=""Красная кисть"" onclick=""changeColor('rgb(212,21,29)', this)"">
-			 //|        <img id=""greenPen""  alt=""Зеленая кисть"" onclick=""changeColor('rgb(131,190,61)', this)"">
-			 //|        <img id=""bluePen""  alt=""Синяя кисть"" onclick=""changeColor('rgb(0,86,166)', this)"">
-
-			 //|    </div>
-			 //|    <div class=""Toolbar"">
-			 //|        - Толщина -<br>
-			 ////|        <img src=""http://professorweb.ru/downloads/pen_thin.gif"" alt=""Тонкая кисть"" onclick=""changeThickness(1, this)"">
-			 ////|        <img src=""http://professorweb.ru/downloads/pen_medium.gif"" alt=""Нормальная кисть"" onclick=""changeThickness(5, this)"">
-			 ////|        <img src=""http://professorweb.ru/downloads/pen_thick.gif"" alt=""Толстая кисть"" onclick=""changeThickness(10, this)"">
-			 // |        <img  alt=""Тонкая кисть"" onclick=""changeThickness(1, this)"">
-			 //|        <img  alt=""Нормальная кисть"" onclick=""changeThickness(5, this)"">
-			 //|        <img  alt=""Толстая кисть"" onclick=""changeThickness(10, this)"">
-			 //|    </div>
              |    <div class=""CanvasContainer"">
              |        <canvas id=""drawingCanvas"" width=""640"" height=""480""></canvas>
              |    </div>
-			 //|    <div class=""Toolbar"">
-			 //|        - Операции-<br>
-			 //|        <button id = ""saveCanvas"" onclick=""saveCanvas()"">Сохранить содержимое Canvas</button>
-			 //|        <button onclick=""clearCanvas()"">Очистить Canvas</button>
-			 //|        <div id=""savedCopyContainer"">
-			 //|            <img id=""savedImageCopy""><br> Щелкните правой кнопкой мыши для сохранения ...
-			 //|        </div>
-			 //|    </div>
              |</body>
              |</html>";
 	
-	возврат текст;
-	
-	
+	Возврат Текст;
+		
 КонецФункции
-
-
-&НаКлиенте
-Процедура Реквизит1ПриНажатии(Элемент, ДанныеСобытия, СтандартнаяОбработка)
-	//Если ДанныеСобытия.button <> Неопределено Тогда   		
-	//	
-	//	Если ДанныеСобытия.button.id = "saveCanvas" Тогда
-	//		СырыеДанные = ЭтаФорма.Элементы.Реквизит1.Документ.images.savedImageCopy.href;
-	//		временный = ПолучитьИмяВременногоФайла("png");
-	//		//ДД = Новый ДвоичныеДанные;
-	//	КонецЕсли; 
-	//	//ПолучитьИОбработатьДанные();		
-	//КонецЕсли; 	
-КонецПроцедуры
-
-&НаКлиенте
-Процедура ПриОткрытии(Отказ)
-	//перем ОкноБраузера;
-	//ОкноБраузера = Элементы.Реквизит1.Документ.parentWindow;
-КонецПроцедуры
- 
-&НаКлиенте
-Процедура ПолучитьИОбработатьДанные()Экспорт
-	//ОкноДок=ЭтаФорма.Элементы.ХТМЛ.Документ.parentWindow;
-	//Если ОкноДок=Неопределено  Тогда   
-	//	ОкноДок=ЭтаФорма.Элементы.ХТМЛ.Документ.defaultView;
-	//КонецЕсли; 
-	//
-	//Пока ОкноДок.queueHead<ОкноДок.queueTail Цикл //Если есть что-то в очереди
-	//	Данные=JSON_В_Объект(ОкноДок.getEvent(ОкноДок.queueHead+1));
-	//	ОкноДок.queueHead=ОкноДок.queueHead+1;
-	//	ВсегоСобытий=ВсегоСобытий+1;
-	//	Сообщить("X="+Данные.x+" Y="+Данные.y+" Всего событий="+ВсегоСобытий); 				
-	//КонецЦикла; 
-	
-КонецПроцедуры // 
 
 &НаКлиенте
 Процедура Сохранить(Команда)
@@ -249,21 +157,15 @@
 	СырыеДанные = ОкноБраузера.imageCopy;
 	СтрокаДанные = СтрЗаменить(СырыеДанные, "data:image/png;base64,", "");
 	
-	Если НЕ ПустыеДанные(СтрокаДанные) Тогда
+	Если Модифицированность Тогда
 		ДвоичныеДанные = Base64Значение(СтрокаДанные);
 		Файл = ПолучитьИмяВременногоФайла("png");
 		ДвоичныеДанные.Записать(Файл);
-		СохранитьНаСервере(СтрокаДанные);
 		сообщить("данные сохранены");
 	Иначе
 		сообщить("нет данных для сохранения");
 	КонецЕсли; 
 	
-КонецПроцедуры
-
-&НаСервере
-Процедура СохранитьНаСервере(СтрокаДанные)	
-	// ДвоичныеДанные = Base64Значение(СтрокаДанные); 
 КонецПроцедуры
 
 &НаКлиенте
@@ -274,20 +176,76 @@
 
 &НаКлиенте
 Функция ПолучитьОкноБраузера()
-	ДокументПервогоБраузера = Элементы.Реквизит1.Документ;
+	ДокументПервогоБраузера = Элементы.ХТМЛ.Документ;
 	ОкноБраузера = ДокументПервогоБраузера.parentWindow; // IE
 	Возврат ОкноБраузера;
 КонецФункции
 
-Функция ПустыеДанные(ДанныеДляСравнения)
-	
-	Результат = Ложь;
-	ЭталонПустыхДанных = "iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAA10dzkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAS+SURBVHhe7cEBDQAAAMKg909tDjcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACzXC7gAB9GuoowAAAABJRU5ErkJggg==";
-	
-	Если ДанныеДляСравнения = ЭталонПустыхДанных Тогда	
-		Результат = Истина;	
-	КонецЕсли; 
-	
-	Возврат Результат;
-	
-КонецФункции // ПустыеДанные()
+&НаКлиенте
+Процедура ХТМЛПриНажатии(Элемент, ДанныеСобытия, СтандартнаяОбработка)
+	Модифицированность = Истина;	
+КонецПроцедуры
+
+&НаКлиенте
+Процедура ЦветЗеленый(Команда)
+	ОкноБраузера = ПолучитьОкноБраузера();
+	ОкноБраузера.changeColor("rgb(131,190,61)");
+	ТекущийЦвет = "Зеленый";
+	УстановитьЗаголовокЦвета();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура ЦветКрасный(Команда)
+	ОкноБраузера = ПолучитьОкноБраузера();
+	ОкноБраузера.changeColor("rgb(212,21,29)");
+	ТекущийЦвет = "Красный";
+	УстановитьЗаголовокЦвета();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура ЦветСиний(Команда)
+	ОкноБраузера = ПолучитьОкноБраузера();
+	ОкноБраузера.changeColor("rgb(0,86,166)");
+	ТекущийЦвет = "Синий";
+	УстановитьЗаголовокЦвета();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура ЦветЧерный(Команда)
+	ОкноБраузера = ПолучитьОкноБраузера();
+	ОкноБраузера.changeColor("rgb(0,0,0)");
+	ТекущийЦвет = "Черный";
+	УстановитьЗаголовокЦвета();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура РазмерБольшой(Команда)
+	ОкноБраузера = ПолучитьОкноБраузера();
+	ОкноБраузера.changeThickness(10, "this");
+	ТекущийРазмер = "Большой";
+	УстановитьЗаголовокРазмера();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура РазмерМаленький(Команда)
+	ОкноБраузера = ПолучитьОкноБраузера();
+	ОкноБраузера.changeThickness(1, "this");
+	ТекущийРазмер = "Маленький";
+	УстановитьЗаголовокРазмера();
+КонецПроцедуры
+
+&НаКлиенте
+Процедура РазмерСредний(Команда)
+	ОкноБраузера = ПолучитьОкноБраузера();
+	ОкноБраузера.changeThickness(5, "this");
+	ТекущийРазмер = "Средний";
+	УстановитьЗаголовокРазмера();
+КонецПроцедуры
+
+Процедура УстановитьЗаголовокЦвета()
+	Элементы.ГруппаЦвета.Заголовок = ТекущийЦвет;
+КонецПроцедуры	
+
+Процедура УстановитьЗаголовокРазмера()
+	Элементы.ГруппаРазмер.Заголовок = ТекущийРазмер;
+КонецПроцедуры	
