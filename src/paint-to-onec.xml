@@ -6,21 +6,21 @@
 				<xr:ClassId>c3831ec8-d8d5-4f93-8a22-f9bfae07327f</xr:ClassId>
 				<xr:ObjectId>c268acd8-9cbf-4139-9a21-ca0a04c4f37e</xr:ObjectId>
 			</xr:ContainedObject>
-			<xr:GeneratedType name="ExternalDataProcessorObject.paint_to_oneass" category="Object">
+			<xr:GeneratedType name="ExternalDataProcessorObject.paint-to-onec" category="Object">
 				<xr:TypeId>dab8a224-bd21-4d74-a5e7-f76579d19304</xr:TypeId>
 				<xr:ValueId>4e84138a-c5a3-4bd7-ac61-e39807d52d78</xr:ValueId>
 			</xr:GeneratedType>
 		</InternalInfo>
 		<Properties>
-			<Name>paint_to_oneass</Name>
+			<Name>paint-to-onec</Name>
 			<Synonym>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>paint to oneass</v8:content>
+					<v8:content>paint to onec</v8:content>
 				</v8:item>
 			</Synonym>
 			<Comment/>
-			<DefaultForm>ExternalDataProcessor.paint_to_oneass.Form.Форма</DefaultForm>
+			<DefaultForm>ExternalDataProcessor.paint-to-onec.Form.Форма</DefaultForm>
 			<AuxiliaryForm/>
 		</Properties>
 		<ChildObjects>
