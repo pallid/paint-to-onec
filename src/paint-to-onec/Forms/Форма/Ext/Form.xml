@@ -158,6 +158,17 @@
 					<CommandName>Form.Command.Очистить</CommandName>
 					<ExtendedTooltip name="ОчиститьРасширеннаяПодсказка" id="9"/>
 				</Button>
+				<LabelDecoration name="ДекорацияЗаглушка" id="30">
+					<AutoMaxWidth>false</AutoMaxWidth>
+					<AutoMaxHeight>false</AutoMaxHeight>
+					<HorizontalStretch>true</HorizontalStretch>
+					<ContextMenu name="ДекорацияЗаглушкаКонтекстноеМеню" id="31"/>
+					<ExtendedTooltip name="ДекорацияЗаглушкаРасширеннаяПодсказка" id="32"/>
+				</LabelDecoration>
+				<LabelDecoration name="ДекорацияВерсия" id="33">
+					<ContextMenu name="ДекорацияВерсияКонтекстноеМеню" id="34"/>
+					<ExtendedTooltip name="ДекорацияВерсияРасширеннаяПодсказка" id="35"/>
+				</LabelDecoration>
 			</ChildItems>
 		</UsualGroup>
 	</ChildItems>
