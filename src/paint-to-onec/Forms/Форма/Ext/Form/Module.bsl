@@ -88,6 +88,7 @@
              |            canvas.onmouseup = stopDrawing;
              |            canvas.onmouseout = stopDrawing;
              |            canvas.onmousemove = draw;
+             |            canvas.ontouchmove = touchmove;
 			 |			  changeColor('rgb(0,86,166)');
 			 |			  changeThickness(1);
              |        }
